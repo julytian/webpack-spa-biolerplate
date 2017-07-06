@@ -1,7 +1,6 @@
-import './style.css'
+import 'sass/index.scss';
 
 let oDiv = document.createElement('div')
 
 oDiv.innerHTML = 'hello webpack'
-oDiv.classList.add('tt')
 document.body.appendChild(oDiv)
