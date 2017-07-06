@@ -13,30 +13,29 @@ module.exports = {
     output: {
         path: config.build.assetsRoot,
         filename: '[name].js',
-        publicPath: process.env.NODE_ENV === 'production'
-            ? config.build.assetsPublicPath
-            : config.dev.assetsPublicPath
+        publicPath: process.env.NODE_ENV === 'production' ?
+            config.build.assetsPublicPath : config.dev.assetsPublicPath
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            'src': resolve('src')
+            'src': resolve('src'),
+            'images': resolve('src/assets/images')
         }
     },
     module: {
-        rules: [
-            {   // 对src和test文件夹下的.js文件使用babel-loader
+        rules: [{ // 对src和test文件夹下的.js文件使用babel-loader
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [resolve('src'), resolve('test')]
             },
-            {   // 对图片资源文件使用url-loader，query.name指明了输出的命名规则
+            { // 对图片资源文件使用url-loader，query.name指明了输出的命名规则
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                    name: utils.assetsPath('images/[name].[hash:7].[ext]')
                 }
             },
             {
@@ -46,6 +45,12 @@ module.exports = {
                     limit: 10000,
                     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
+            },
+            {
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader?attrs[]=img:src&attrs[]=img:data-src'
+                }]
             }
         ]
     }
