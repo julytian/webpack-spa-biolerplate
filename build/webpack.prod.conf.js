@@ -8,7 +8,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var ImageminPlugin = require('imagemin-webpack-plugin').default
 
 var env = config.build.env
 
@@ -62,7 +61,9 @@ var webpackConfig = merge(baseWebpackConfig, {
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
-                removeAttributeQuotes: true
+                removeAttributeQuotes: true,
+                minifyCSS: true,
+                minifyJS:true
                 // more options:
                 // https://github.com/kangax/html-minifier#options-quick-reference
             },
@@ -94,14 +95,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             from: path.resolve(__dirname, '../static'),
             to: config.build.assetsSubDirectory,
             ignore: ['.*']
-        }]),
-        // 压缩图片
-        new ImageminPlugin({
-            disable: process.env.NODE_ENV !== 'production', // Disable during development 
-            pngquant: {
-                quality: '80-90'
-            }
-        })
+        }])
     ]
 })
 
