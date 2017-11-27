@@ -1,6 +1,6 @@
 ## 注意
 
-项目使用 **tinypng** 进行图片压缩,所以上线之前先把静态  **images图片** 拷贝一份到跟目录,然后在 **gulpfile.js**里面配置需要替换图片的输出目的地址,最后执行 `npm run imagemin` 再 `npm run build`
+项目使用 **tinypng** 进行图片压缩,所以上线之前先把静态  **images图片资源** 拷贝一份到跟目录**images**下,然后在 **gulpfile.js**里面配置需要替换图片的输出地址,最后执行 `npm run imagemin` 再 `npm run build`
 
 ## Build Setup
 
